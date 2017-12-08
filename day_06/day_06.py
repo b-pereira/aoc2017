@@ -2,7 +2,7 @@
 
 
 # # # # #
-# Part 1
+# Part 1 aand Part 2
 #
 def distribute(t, max_block, max_block_index):
 
@@ -27,16 +27,14 @@ def distribute(t, max_block, max_block_index):
     return t
 
 
-def mem_realloc(t):
-
-    # there aren't any configurations
-    dicio = dict()
+def mem_realloc(t, configurations, min_occurences=0, max_occurences=2):
 
     # there aren't any cycles yet
     cycle = 0
 
-    # while configuration hasn't been seen before
-    while dicio.get(tuple(t), 0) < 2:
+    # while configuration hasn't been seen before between an interval of minimum of occurences and
+    # maximum of occurences
+    while min_occurences <= configurations.get(tuple(t), 0) < max_occurences:
 
         # get the max value to redistribute
         max_block = max(t)
@@ -49,7 +47,7 @@ def mem_realloc(t):
         t = distribute(t, max_block, max_block_index)
 
         # save configuration
-        dicio[tuple(t)] = dicio.get(tuple(t), 0) + 1
+        configurations[tuple(t)] = configurations.get(tuple(t), 0) + 1
 
         # number of cycles is incremented
         cycle += 1
@@ -61,9 +59,14 @@ def main():
 
     f = open('input.txt')
 
-    ls = [int(value) for value in f.readline().replace("\t\n", "").split()]
+    # there aren't any configurations
+    configurations = dict()
 
-    print(mem_realloc(ls))
+    bank = [int(value) for value in f.readline().replace("\t\n", "").split()]
+
+    print(mem_realloc(bank, configurations))
+
+    print(mem_realloc(bank, configurations, 1, 3))
 
 
 if __name__ == "__main__":
