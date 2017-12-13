@@ -7,18 +7,19 @@ def is_leaf(node):
 
 
 # I'm using dictionaries with the key type str and value type list and creating
-# dictionary key: str, value: dict. Thence, a node of the tree that is visited
-# is a dictionary or a list otherwise. I'm aware that this isn't the most
-# elegant mechanism to mark visited nodes and serves only to verify is exists
-# in the tree, but wasn't visited. All visited nodes are deleted.
+# dictionary key type str and value type dict. Thence, a node of the tree that
+# is visited is a dictionary or a list otherwise. I'm aware that this isn't the
+# most elegant mechanism to check visited nodes and serves only to verify, but
+# wasn't visited. All visited nodes are deleted.
 def is_visited(node):
     return not(type(node) is list)
 
 
-# This solution uses a list od list containing the paths of the graph. I'm
-# using an auxiliary list, because I can modify the original tree, composing it
-# with previous branchs, resulting the original tree with only one key: the
-# root.
+# This solution uses a list of lists (a tuple of a str and a list, to be
+# precise) containing the paths of the graph. I'm using the latter with the
+# purpose of modify modify the original tree, composing it with previous
+# branchs, resulting the original tree with only one key (the root) and
+# sub-trees as values.
 def build_tree(tree, ls):
     d = dict()
     for elem in ls:
