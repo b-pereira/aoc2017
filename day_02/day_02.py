@@ -18,7 +18,7 @@ def find_divisable(row):
     # with the result being an integer number), we traverse the row and for
     # each number we compare with all the different values from the row. Note
     # that there is only one pair, thence the return statement call as soon
-    # they're founded
+    # they're found
     for num1 in row:
         for num2 in row:
             if num1 != num2 and num1 % num2 == 0:
@@ -37,10 +37,6 @@ def main():
     matrix = get_matrix(f)
 
     print(part_01(matrix))
-
-#    print(find_divisable([5, 9, 2, 8]))
-#    print(find_divisable([9, 4, 7, 3]))
-#    print(find_divisable([3, 8, 6, 5]))
 
     print(part_02(matrix))
 
