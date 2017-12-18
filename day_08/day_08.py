@@ -15,6 +15,7 @@ def dec(regs, reg,  num):
 def oper(reg, num, op, regs):
 
     op(regs, reg, num)
+    return regs[reg]
 
 
 def arrange_instruc(inst, id_patt, const_patt, oper_patt):
@@ -28,8 +29,8 @@ def arrange_instruc(inst, id_patt, const_patt, oper_patt):
         ids[3],
         opers[0],
         consts[1],
-
         ids[0])
+
     return string
 
 
@@ -41,12 +42,15 @@ def main():
     id_patt = re.compile(r'[a-z]+')
     const_patt = re.compile(r'-?[0-9]+')
     oper_patt = re.compile(r'[<>=!]=?')
+    max_ = 0
 
     for line in f:
         inst = arrange_instruc(line.strip(), id_patt, const_patt, oper_patt)
-        eval(inst)
+        res = eval(inst)
+        if res > max_:
+            max_ = res
 
-    print(max(regs.values()))
+    print(max(regs.values()), max_)
 
 
 if __name__ == "__main__":
